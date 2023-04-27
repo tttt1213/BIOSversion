@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>非同期処理の例</title>
+</head>
+<body>
+  <h1>Hello World!</h1>
+  <p id="result"></p>
+
+  <script>
+    // ページ読み込み時にtest.pyを実行する
+    document.addEventListener('DOMContentLoaded', function() {
+      fetchData();
+    });
+
+    function fetchData() {
+      // test.pyのCGI URL
+      const cgiUrl = 'test1.py';
+
+      // test.pyを非同期で呼び出し
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', cgiUrl, true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            // test.pyの結果を画面に表示
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = 'CGIの結果: ' + xhr.responseText;
+          } else {
+            // エラーの場合は画面に表示
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = 'CGIの実行に失敗しました。';
+          }
+        }
+      };
+      xhr.send();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+#!/bin/python3
+
+import pandas as pd
+import datetime
+from string import Template
+import sys
+from morimod import DB
+import pandas_access as mdb
+
+class table():
+
+    #初期値設定
+    def __init__(self,dbpath,dbname):
+        self.dbpath=dbpath
+        self.dbname=dbname
+
+    def create(self):
+        self.db = mdb.read_table(self.dbpath,self.dbname)
+        df = self.db
+        df["brand"] = list["name"].str.split(" ",n=1).str.get(0)
+        df["product name"] = list["name"].str.split(" ",n=1).str.get(1)
+        df["link"] = '<a href=\"result.py?BRAND=' + list["name"].str.split(" ",n=1).str.get(0) + '&MB=' + list["name"].str.split(" ",n=1).str.get(1) + '\">Search</a>'
+        pd.set_option("display.max_rows", None)
+        return df
+
+main_table=table.create('/mnt/mori/test.mdb','test1')
+print(table)

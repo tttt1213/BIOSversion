@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>非同期処理の例</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <h1>非同期処理の例</h1>
+  <button onclick="fetchData()">データを取得</button>
+  <div id="result"></div>
+
+  <script>
+    function fetchData() {
+      // APIのURL
+      const apiUrl = 'https://jsonplaceholder.typicode.com/posts/1';
+
+      // APIを非同期で呼び出し
+      $.ajax({
+        url: apiUrl,
+        method: 'GET',
+        success: function(response) {
+          // APIのレスポンスを画面に表示
+          const resultElement = document.getElementById('result');
+          resultElement.innerHTML = 'データの取得に成功しました。<br>';
+          resultElement.innerHTML += 'ID: ' + response.id + '<br>';
+          resultElement.innerHTML += 'タイトル: ' + response.title + '<br>';
+          resultElement.innerHTML += '本文: ' + response.body + '<br>';
+        },
+        error: function(error) {
+          // エラーの場合は画面に表示
+          const resultElement = document.getElementById('result');
+          resultElement.innerHTML = 'データの取得に失敗しました。';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

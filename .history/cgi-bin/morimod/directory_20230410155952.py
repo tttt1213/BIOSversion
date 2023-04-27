@@ -19,7 +19,7 @@ def get_path(MB):
     return fullpath
 """
 
-def get_path(search_strings):
+def fget_path(search_strings):
     dir_path="/testDisk"
     matching_dirs = []
     max_similarity = 0

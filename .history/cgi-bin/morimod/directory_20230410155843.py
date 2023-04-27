@@ -19,7 +19,7 @@ def get_path(MB):
     return fullpath
 """
 
-def get_path(search_strings):
+def find_directory_with_highest_similarity(search_strings):
     dir_path="/testDisk"
     matching_dirs = []
     max_similarity = 0

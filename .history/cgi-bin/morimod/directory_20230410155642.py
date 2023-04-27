@@ -35,13 +35,6 @@ def get_path(search_strings):
                 elif similarity == max_similarity:
                     matching_dirs.append(item_path)
 
-    if matching_dirs:
-        # マッチングするディレクトリがある場合は一致度が最も高いものを返す
-        return matching_dirs[0]
-    else:
-        # マッチングするディレクトリがなければNoneを返す
-        return None
-
 
 def get_tree(PATH):
     cmd = "tree {} -H {} --nolinks".format(PATH,PATH)

@@ -1,26 +1,21 @@
 #!/bin/python3
-import subprocess
-from bs4 import BeautifulSoup as bs
-from html.parser import HTMLParser
-import glob
 import os
 import difflib
 
-"""
-def get_path(MB):
-    fullpath="Nothing"
-    target =MB.lower()
-    default_path = "/testDisk/*"
-    files=glob.glob(default_path)
 
-    for file in files:
-        if target in file.lower():
-           fullpath = file
-    return fullpath
-"""
+def find_directories_recursive(search_strings, dir_path):
+    matching_dirs = []
+    for root, dirs, files in os.walk(dir_path):
+        for item in dirs:
+            item_path = os.path.join(root, item)
+            # search_stringsを含むまたは類似の名前を持つディレクトリを検索
+            if search_strings in item or difflib.SequenceMatcher(None, item, search_strings).ratio() >= 0.8:
+                matching_dirs.append(item_path)
 
-def get_path(search_strings):
-    dir_path="/testDisk"
+    # マッチングするディレクトリがなければ空リストを返す
+    return matching_dirs
+
+def find_directory_with_highest_similarity(search_strings, dir_path):
     matching_dirs = []
     max_similarity = 0
     for root, dirs, files in os.walk(dir_path):
@@ -42,10 +37,11 @@ def get_path(search_strings):
         # マッチングするディレクトリがなければNoneを返す
         return None
 
+search_strings = "Z590"
+dir_path = "/testDisk"
 
-def get_tree(PATH):
-    cmd = "tree {} -H {} --nolinks".format(PATH,PATH)
-    pre_html = subprocess.run(cmd,shell=True, capture_output=True).stdout
-    soup = bs(pre_html,'html.parser')
-    soup.body.h1.extract()
-    return soup
+list = find_directories_recursive(search_strings, dir_path)
+highestfile = find_directory_with_highest_similarity(search_strings, dir_path)
+
+print(list)
+print (highestfile)

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CGI Hello World</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // 非同期でCGIプログラムを実行し、結果を表示する
+            $.get("test.py", function(data) {
+                $("#cgiOutput").html(data);
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Hello World</h1>
+    <p>This is a static message.</p>
+    <div id="cgiOutput">
+        <!-- ここに非同期でCGIの出力が表示されます -->
+    </div>
+</body>
+</html>

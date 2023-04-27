@@ -1,6 +1,6 @@
 #!/bin/python3 
-#import requests
-#from bs4 import BeautifulSoup
+import requests
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
